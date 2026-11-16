@@ -14,7 +14,7 @@ WORKDIR /app
 
 COPY --chown=nginx:nginx --from=builder /src/dist /usr/share/nginx/html
 
-EXPOSE 8080
+EXPOSE 80
 
 ENTRYPOINT ["nginx", "-c", "/etc/nginx/nginx.conf"]
 CMD ["-g", "daemon off;"]
