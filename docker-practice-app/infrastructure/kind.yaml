@@ -16,11 +16,19 @@ nodes:
 
   - role: worker
     labels:
-      tier: frontend
+      app: frontend
 
   - role: worker
     labels:
       tier: backend
+    extraMounts:
+      - hostPath: /home/giuse/data-training-devops/postgres
+        containerPath: /data/postgres
+
+  - role: worker
+    labels:
+      tier: backend
+      app: frontend
     extraMounts:
       - hostPath: /home/giuse/data-training-devops/postgres
         containerPath: /data/postgres
