@@ -1,0 +1,13 @@
+controller:
+  hostPort:
+    enabled: true #apre le porte 80 e 443 del container nginx direttamente sull'interfaccia di rete del nodo host che lo ospita
+  service:
+    type: NodePort
+  publishService:
+    enabled: false
+  nodeSelector:
+    ingress-ready: "true"
+  tolerations: #permette di aggire il taint del control-plane e permettere l'installazione del controller
+    - key: "node-role.kubernetes.io/control-plane"
+      operator: "Equal"
+      effect: "NoSchedule"

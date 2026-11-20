@@ -4,3 +4,12 @@ target
 .vscode
 .idea
 .env
+# Documenti Word
+*.doc
+*.docx
+*.dot
+*.dotx
+*.docm
+*.dotm
+#Cartella secrets
+docker-practice-app/config

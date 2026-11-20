@@ -26,16 +26,28 @@ spec:
             - name: local
               mountPath: var/lib/postgresql/data
           env:
-            - name: POSTGRES_DB
-              value: "miodb"
-            - name: POSTGRES_USER
-              value: "admin"
             - name: POSTGRES_PASSWORD
-              value: "password"
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: password
+
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: username
+
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: db-name
       volumes:
         - name: local
           hostPath:
             path: /data/postgres
             type: DirectoryOrCreate
+
   updateStrategy:
     type: RollingUpdate
